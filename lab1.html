@@ -1,0 +1,65 @@
+<HEAD>
+		<BODY style="margin:0;">
+			<canvas id = 'lab01' width="400" height="400"></canvas>
+<script>
+	var canvas = document.getElementById("lab01");
+	var cnv = canvas.getContext("2d");
+	var numOfBalls = 0;
+
+	var balls = [];
+	balls[numOfBalls] = new Ball(40, 40);
+	numOfBalls++;
+
+	canvas.addEventListener('mousedown', onclick, false)
+
+	canvas.onclick = function(event){
+		var x = event.pageX;
+		var y = event.pageY;
+	balls[numOfBalls] = new Ball(x, y);
+	numOfBalls++;
+	}
+
+
+	function Ball(x, y){
+		this.x = x;
+		this.y = y;
+
+
+
+	this.show = function(){
+		cnv.beginPath();
+		cnv.fillStyle = "white";
+		cnv.arc(this.x, this.y, 15, 0, Math.PI*2);
+		cnv.fill();
+	}
+
+
+	this.move = function(){
+		this.x +=3;
+		this.y +=3;
+
+	}
+
+	}
+
+	
+
+	function draw(){
+		cnv.fillStyle = "green";
+		cnv.fillRect(0, 0, canvas.width, canvas.height);
+		for (var i = 0; i < numOfBalls; i++) {
+			balls[i].show();
+			balls[i].move();
+		}
+	}
+
+
+	function update(){
+		draw();
+		window.requestAnimationFrame(update);
+	}
+
+	update();
+</script>
+		</BODY>
+</HEAD>
